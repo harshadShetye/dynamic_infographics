@@ -1,0 +1,144 @@
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="custom.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+  <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+  <script src="test.js" language="JavaScript"></script>
+</head>
+
+<body style="background: #ddd">
+  <!-- <div id="needle-syringe-container"></div> -->
+  <!-- <div id="svgpathCondom"></div> -->
+  <!-- horizontal fill test case -->
+  <div class="container m-t50" >
+    <div class="row">
+      <div class="col-4 text-center">
+        <select id="selectInfographic" >
+          <option value="test">Select Infographic</option>
+          <option value="hospitalValue">Health Services</option>
+          <option value="maternalHealth">Maternal Health</option>
+          <option value="poverty">Poverty</option>
+        </select>
+      </div>
+      <div class="col-4 text-center">
+        <input type="color" name="fillColor" value="#cc7e0b" id="fillColor">
+      </div>
+      <div class="col-4 text-center">
+        <input type="number" name="fillNumber" placeholder="fill Percentage"  id="fillNumber">
+      </div>
+    </div>
+
+  </div>
+  <a href="#" class="submit-btn">Submit</a>
+
+  <div style="text-align: center;">
+    <div id="infoGraphicContainer"></div>
+  </div>
+  <!-- <script type="text/javascript" src="graphic.js"></script> -->
+  <script type="text/javascript" src="infoIcons.js"></script>
+  <script type="text/javascript" src="info.js"></script>
+  
+  <script>
+  
+
+  /*setInterval(function() {
+      updateCondomGraphic();
+  }, 10000)
+  function updateCondomGraphic() {
+      var rand = Math.floor((Math.random() * 100) + 1);
+          console.log(rand);
+          gradient.transition().attr("y1",  rand + "%")
+          .duration(1500) 
+          .delay(100); 
+          svgcanvas.select("text")
+                      .text(rand+'%');
+          condomText.transition().duration(500)
+              .tween("text", function() {
+                  console.log(this)
+                    var i = d3.interpolateRound(0, (100-rand));
+                    return function(t) {
+                      this.textContent = i(t) + "%";
+                    };
+          });
+  }*/
+
+  // needle syringe
+
+  var gradientNeedleSyringe = null;
+  var svgCanvasNeedleSyringe = null;
+  var needleSyringeText = null;
+  var divElemNeedleSyringe = d3.select("#needle-syringe-container");
+  (function needleSyringeGraphic(value) {
+    value = 100 - value;
+    svgCanvasNeedleSyringe = divElemNeedleSyringe.append("svg:svg")
+      .attr("width", 80)
+      .attr("height", 100);
+
+    svgCanvasNeedleSyringe.append("svg:path")
+      .attr("d", "M0,96.7700904 L12.3258721,96.7700904 L12.3258721,79.3285784 L0.0495092645,79.3285784 L0.0495092645,20.5442232 L14.9348517,20.5442232 L14.9348517,4.72494344 L18.0651483,0 L18.0651483,20.5442232 L33,20.5442232 L33,79.3285784 L20.7236371,79.3285784 L20.7236371,96.7700904 L32.9504907,96.7700904 L32.9504907,100 L0,100 Z M0,96.7700904")
+      .style("stroke-width", 2)
+      .style("stroke", "#ADADAD")
+      .style("fill", "url(#gradientNeedleSyringe)");
+
+    gradientNeedleSyringe = svgCanvasNeedleSyringe.append("defs")
+      .append("linearGradient")
+      .attr("id", "gradientNeedleSyringe")
+      .attr("y2", "0%")
+      .attr("x2", value + "%")
+      .attr("y1", "0%")
+      .attr("x1", "100%")
+      .attr("spreadMethod", "pad");
+
+    gradientNeedleSyringe.append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", "#fff")
+      .attr("stop-opacity", 1);
+
+    gradientNeedleSyringe.append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", "#8A0707")
+      .attr("stop-opacity", 1);
+
+    needleSyringeText = svgCanvasNeedleSyringe.append("text")
+      .text('30%')
+      .attr('x', 5)
+      .attr('y', 59)
+      .attr('fill', '#8A0707')
+      .attr("font-size", 13 + "px");
+
+    needleSyringeText.transition().duration(500)
+      .tween("text", function() {
+
+        var i = d3.interpolateRound(0, value);
+        return function(t) {
+          this.textContent = i(t) + "%";
+        };
+      });
+
+  })(46);
+
+  // setInterval(function() {
+  //         updateNeedleSyringeGraphic();
+  //     }, 12000)
+  //     function updateNeedleSyringeGraphic() {
+  //         var rand = Math.floor((Math.random() * 100) + 1);
+  //             console.log(rand);
+  //             gradientNeedleSyringe.transition().attr("y1",  rand + "%")
+  //             .duration(1500) 
+  //             .delay(100); 
+  //             svgCanvasNeedleSyringe.select("text")
+  //                         .text(rand+'%');
+  //             needleSyringeText.transition().duration(500)
+  //                 .tween("text", function() {
+  //                     console.log(this)
+  //                       var i = d3.interpolateRound(0, (100-rand));
+  //                       return function(t) {
+  //                         this.textContent = i(t) + "%";
+  //                       };
+  //             });
+  //     }
+  </script>
+</body>
+
+</html>
